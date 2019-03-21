@@ -15,5 +15,8 @@
     <h2><?php echo $product['rus_name']; ?> (<?php echo $product['price']; ?> рублей)</h2>
     <div class="descr"><?php echo $product['descr']; ?></div>
     <img width="300" src="img/<?php echo $product['img']; ?>" alt="<?php echo $product['rus_name']; ?>">
-    <button type="submit">Добавить в корзину</button>
+    <form action="actions/add.php" method="POST">
+        <input type="hidden" name="id" value="<?php echo $product['id']; ?>">
+        <input type="submit" value="Добавить в корзину">
+    </form>
 </div>
