@@ -1,7 +1,16 @@
 <?php 
+    session_start();
     require_once 'db/db.php';
+
     $cats = $connect->query("SELECT * FROM cats");
     $cats = $cats->fetchAll(PDO::FETCH_ASSOC);
+    if(!$cats)
+         header("Location: index.php");
+
+    if (!isset($_SESSION['totalQuantity'])){
+        $_SESSION['totalQuantity'] = 0;
+        $_SESSION['totalPrice'] = 0;
+    }
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -21,7 +30,7 @@
         <?php foreach ($cats as $cat) { ?>
         <li><a href="index.php?cat=<?php echo $cat['cat_name']; ?>"><? echo $cat['rus_name']; ?></a></li>
         <?php } ?>
-        <li><a href="cart.php">Корзина (Товаров: 15 на сумму 9955 руб)</a></li>
+        <li><a href="cart.php">Корзина (Товаров: <?php echo $_SESSION['totalQuantity']; ?> на сумму <?php echo $_SESSION['totalPrice']; ?> руб)</a></li>
     </ul>
 </nav>
 <hr>
