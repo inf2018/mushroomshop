@@ -1,5 +1,5 @@
 <?php 
-    require_once 'header.php';
+    require_once 'db/db.php';
 
     if(isset($_GET['product'])){
     	$currentProduct = $_GET['product'];
@@ -7,6 +7,10 @@
     	$product = $product->fetch(PDO::FETCH_ASSOC);
     	// var_dump($product);
     }
+    if(!$product){
+        header("Location: index.php");
+    }
+    require_once 'header.php';
 ?>
 
 <div class="product-card">
@@ -15,8 +19,5 @@
     <h2><?php echo $product['rus_name']; ?> (<?php echo $product['price']; ?> рублей)</h2>
     <div class="descr"><?php echo $product['descr']; ?></div>
     <img width="300" src="img/<?php echo $product['img']; ?>" alt="<?php echo $product['rus_name']; ?>">
-    <form action="actions/add.php" method="POST">
-        <input type="hidden" name="id" value="<?php echo $product['id']; ?>">
-        <input type="submit" value="Добавить в корзину">
-    </form>
+    <?php require 'add-form.php'; ?>
 </div>

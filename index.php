@@ -15,8 +15,8 @@
         <span class="error-text"><span class="bold">404 ERROR</span><br>Данная страница не существует!</span>
         <a href="index.php" class="main-link">Вернуться на главную</a>
     </div>
-
-<?php } ?>
+    
+<?php die(); } ?>
 
 
     <div class="main">
@@ -27,10 +27,7 @@
                 <img src="img/<?php echo $product['img']; ?>" alt="Фото">
             </a>
             <div class="label"><?php echo $product['rus_name'].' ('.$product['price']; ?> рублей)</div>
-            <form action="actions/add.php" method="POST">
-                <input type="hidden" name="id" value="<?php echo $product['id']; ?>">
-                <input type="submit" value="Добавить в корзину">
-            </form>
+            <?php require 'add-form.php'; ?>
         </div>
         <?php } ?>
     </div>
